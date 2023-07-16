@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Тестове завдання</title>
+<script>
+
+
+function tasktest() {
+ var x = document.forms["findsymbol"]["textfind"].value;
+    if (x == "") {
+        alert("Необхідно ввести довільний текст!");       
+	}
+	else 
+	{
+	
+	
+	x = x.replace( / +/g, ' ' ); // видаляємо зайві пробіли
+	var arrayOfStrings = x.split(' '); // розбиваємо текст на окремі слова
+	var newword = "";
+	var newword2 = "Результат: ";
+
+	for (let i = 0; i < arrayOfStrings.length; i++) { // перебираємо слов
+
+		newword = newword + findinword(arrayOfStrings[i]);
+  
+	}
+	
+	newword2 = newword2 + findinword(newword);
+
+	alert(newword2);
+	document.forms["findsymbol"]["textfind"].value = "";
+
+	}
+
+
+}
+
+function findinword(word){
+//розбиваємо слово на символи
+		var letters = word.split('');
+		var createword = ""; 
+		//набір унікальних символів у слові
+		const duplicates = letters.filter((e, index, arr) => arr.indexOf(e) == index)
+		
+			for (let k = 0; k < duplicates.length; k++) {
+				//якщо один з набору символів лише один раз зустрічається у слові
+				if ((word.split(duplicates[k]).length - 1) == 1) {
+					createword = createword + duplicates[k];
+					break; // якщо знайшли перший унікальний символ
+				}
+
+			}
+		return createword;
+}
+
+</script>
+ <style>
+   button {
+		background: #008B8B;
+		color: #fff; 
+		border: none;
+		padding: 10px 15px;  
+		margin-top: 20px;
+		border-radius: 5px;
+   }
+   
+   button:hover{
+		background: #147575; 
+		color: #fff;		
+   }
+   
+  #textfind{
+		height:200px;
+		width:100%;
+		background: #f7f7b7;
+		margin-top: 20px;
+		border-radius: 5px;
+		box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  
+  #textfind:focus{
+		background: #fafa9d; 
+	}
+	
+  #block{
+		width:500px;
+  }
+  
+
+		
+ </style>   
+</head>
+<body>
+
+<h2>Тестове завдання - пошук символа</h2>
+
+
+<form name="findsymbol">
+<div id="block">
+  <label for="textfind">Введіть довільний текст:</label><br/>
+  <textarea id="textfind" name="textfind" placeholder="Текст ..." rows="7" cols="33"></textarea><br/>
+  <button type="button" onclick="tasktest();">Пошук символа</button>
+</div>  
+</form>
+
+
+
+</body>
+</html>
+        
